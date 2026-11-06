@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>漫蛙网页版入口-漫蛙网页版在线访问入口_漫蛙网页版直达</title>
+<meta name="description" content="漫蛙网页版入口页面，汇集漫蛙网页版在线访问方式、入口使用说明与常见问题，帮助读者快速了解如何进入漫蛙网页版并顺畅浏览漫画内容。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23123c3a'/%3E%3Ccircle cx='24' cy='26' r='7' fill='%23ffd166'/%3E%3Ccircle cx='44' cy='26' r='7' fill='%23ffd166'/%3E%3Cpath d='M18 44c4 6 10 8 14 8s10-2 14-8' stroke='%236ee7c8' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --ink:#123c3a;
+    --ink-soft:#2f5a57;
+    --mint:#6ee7c8;
+    --sun:#ffd166;
+    --cream:#f6f4ec;
+    --paper:#ffffff;
+    --line:#d9e2dc;
+    --text:#22322f;
+    --muted:#5d726d;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,-apple-system,sans-serif;
+    background:var(--cream);
+    color:var(--text);
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{width:min(1120px,92vw);margin:0 auto;}
+
+  /* ---------- header ---------- */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,244,236,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:18px;padding:12px 0;flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink);font-size:1.02rem;letter-spacing:.2px;}
+  .brand-mark{width:38px;height:38px;flex:0 0 auto;border-radius:12px;background:var(--ink);display:grid;place-items:center;}
+  nav.main{display:flex;gap:6px;flex-wrap:wrap;}
+  nav.main a{
+    padding:7px 13px;border-radius:999px;font-size:.92rem;color:var(--ink-soft);
+    transition:background .18s,color .18s;
+  }
+  nav.main a:hover,nav.main a:focus-visible{background:#e4efe9;color:var(--ink);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:linear-gradient(160deg,#123c3a 0%,#1c5550 58%,#2a6e64 100%);
+    color:#eaf6f1;
+    border-bottom:1px solid var(--line);
+  }
+  .hero::after{
+    content:"";position:absolute;right:-90px;top:-90px;width:340px;height:340px;
+    background:radial-gradient(circle,rgba(110,231,200,.35),transparent 68%);
+    border-radius:50%;pointer-events:none;
+  }
+  .hero-inner{
+    display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;
+    padding:56px 0 60px;position:relative;z-index:1;
+  }
+  .kicker{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(110,231,200,.16);border:1px solid rgba(110,231,200,.4);
+    color:#bff5e6;font-size:.8rem;letter-spacing:1px;
+    padding:5px 13px;border-radius:999px;margin-bottom:18px;
+  }
+  h1{
+    font-size:clamp(1.85rem,4.2vw,3rem);
+    line-height:1.22;margin:0 0 18px;font-weight:800;letter-spacing:.5px;
+    color:#ffffff;
+  }
+  .hero p.lead{margin:0 0 26px;font-size:1.02rem;color:#d3ece4;max-width:34em;}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 24px;border-radius:999px;font-weight:700;font-size:.96rem;
+    transition:transform .18s,box-shadow .18s,background .18s;
+  }
+  .btn-primary{background:var(--sun);color:#20302c;box-shadow:0 8px 20px rgba(255,209,102,.28);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(255,209,102,.36);}
+  .btn-ghost{background:transparent;color:#d7f3ea;border:1px solid rgba(215,243,234,.45);}
+  .btn-ghost:hover{background:rgba(215,243,234,.12);}
+  .hero-art{
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
+    border-radius:26px;padding:18px;
+  }
+  .hero-facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+  .fact{background:rgba(255,255,255,.08);border-radius:14px;padding:12px 14px;}
+  .fact b{display:block;font-size:1.15rem;color:var(--sun);}
+  .fact span{font-size:.8rem;color:#c9e7df;}
+
+  /* ---------- section base ---------- */
+  section{padding:54px 0;}
+  .sec-head{margin-bottom:28px;max-width:42em;}
+  .sec-tag{
+    font-size:.78rem;letter-spacing:2px;color:#2a6e64;font-weight:700;
+    text-transform:uppercase;margin-bottom:8px;
+  }
+  h2{font-size:clamp(1.3rem,2.4vw,1.7rem);margin:0 0 10px;color:var(--ink);font-weight:800;line-height:1.35;}
+  .sec-head p{margin:0;color:var(--muted);font-size:.96rem;}
+
+  /* ---------- entry cards ---------- */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 20px;display:flex;flex-direction:column;gap:10px;
+    transition:transform .2s,box-shadow .2s,border-color .2s;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(18,60,58,.08);border-color:#b9d8cd;}
+  .card-mark{
+    width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+    background:#e4f4ee;color:var(--ink);
+  }
+  .card h3{margin:0;font-size:1.05rem;color:var(--ink);}
+  .card p{margin:0;font-size:.9rem;color:var(--muted);flex:1;}
+  .card .go{font-size:.88rem;font-weight:700;color:#1c5550;}
+  .card .go::after{content:" →";}
+
+  /* ---------- steps ---------- */
+  .steps-wrap{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:32px;}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:step;}
+  .step{position:relative;padding-top:14px;}
+  .step::before{
+    counter-increment:step;content:counter(step,decimal-leading-zero);
+    font-size:.85rem;font-weight:800;color:#2a6e64;letter-spacing:1px;
+    display:inline-block;margin-bottom:6px;
+    background:#e4f4ee;padding:2px 10px;border-radius:999px;
+  }
+  .step h3{margin:0 0 6px;font-size:1rem;color:var(--ink);}
+  .step p{margin:0;font-size:.88rem;color:var(--muted);}
+
+  /* ---------- article block ---------- */
+  .split{display:grid;grid-template-columns:1.6fr 1fr;gap:34px;align-items:start;}
+  .prose p{margin:0 0 16px;font-size:.98rem;color:#33443f;}
+  .prose h3{margin:26px 0 8px;font-size:1.08rem;color:var(--ink);}
+  .prose ul{margin:0 0 16px;padding-left:1.2em;color:#33443f;font-size:.96rem;}
+  .prose li{margin-bottom:6px;}
+  .aside{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;position:sticky;top:86px;
+  }
+  .aside h3{margin:0 0 12px;font-size:1rem;color:var(--ink);}
+  .aside dl{margin:0;font-size:.88rem;}
+  .aside dt{font-weight:700;color:var(--ink);margin-top:12px;}
+  .aside dt:first-child{margin-top:0;}
+  .aside dd{margin:2px 0 0;color:var(--muted);}
+
+  /* ---------- faq ---------- */
+  .faq{display:grid;gap:12px;}
+  details{
+    background:var(--paper);border:1px solid var(--line);border-radius:14px;
+    padding:16px 20px;
+  }
+  details[open]{border-color:#b9d8cd;background:#fbfdfb;}
+  summary{cursor:pointer;font-weight:700;color:var(--ink);font-size:.98rem;list-style:none;}
+  summary::-webkit-details-marker{display:none;}
+  summary::before{content:"＋";color:#2a6e64;margin-right:10px;font-weight:800;}
+  details[open] summary::before{content:"－";}
+  details p{margin:12px 0 0;font-size:.92rem;color:var(--muted);}
+
+  /* ---------- download strip ---------- */
+  .strip{
+    background:linear-gradient(120deg,#123c3a,#2a6e64);
+    border-radius:24px;padding:32px;color:#eaf6f1;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  }
+  .strip h2{color:#fff;margin:0 0 6px;}
+  .strip p{margin:0;color:#c9e7df;font-size:.92rem;max-width:40em;}
+  .btn-dl{
+    background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);
+    color:#fff;padding:12px 26px;border-radius:999px;font-weight:700;
+    pointer-events:none;
+  }
+
+  /* ---------- footer ---------- */
+  footer.site{
+    background:#0f2f2d;color:#b9d4cc;padding:36px 0 28px;margin-top:20px;
+  }
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px;}
+  .foot-brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;margin-bottom:10px;}
+  .foot-brand .brand-mark{background:#1c5550;}
+  footer.site h4{color:#eaf6f1;font-size:.92rem;margin:0 0 10px;}
+  footer.site ul{list-style:none;margin:0;padding:0;font-size:.86rem;}
+  footer.site li{margin-bottom:6px;}
+  footer.site a:hover{color:var(--mint);}
+  .foot-note{
+    border-top:1px solid rgba(185,212,204,.2);margin-top:26px;padding-top:16px;
+    font-size:.8rem;color:#8fb3aa;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:900px){
+    .hero-inner{grid-template-columns:1fr;padding:40px 0 44px;}
+    .cards{grid-template-columns:1fr 1fr;}
+    .steps{grid-template-columns:1fr 1fr;}
+    .split{grid-template-columns:1fr;}
+    .aside{position:static;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:600px){
+    .nav-row{padding:10px 0;}
+    nav.main a{padding:6px 10px;font-size:.85rem;}
+    .hero-inner{padding:32px 0 38px;gap:26px;}
+    .hero-facts{grid-template-columns:1fr 1fr;}
+    .cards,.steps{grid-template-columns:1fr;}
+    .steps-wrap,.strip{padding:22px;}
+    .foot-grid{grid-template-columns:1fr;}
+    section{padding:38px 0;}
+  }
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <circle cx="9" cy="10" r="3" fill="#ffd166"/>
+          <circle cx="17" cy="10" r="3" fill="#ffd166"/>
+          <path d="M7 16c1.6 2.2 3.4 3 5 3s3.4-.8 5-3" stroke="#6ee7c8" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>漫蛙网页版入口</span>
+    </a>
+    <nav class="main" aria-label="站内导航">
+      <a href="#entry">入口说明</a>
+      <a href="#steps">访问步骤</a>
+      <a href="#reading">访问须知</a>
+      <a href="#faq">常见问题</a>
+      <a href="#download">客户端下载</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="kicker">漫蛙网页版 · 浏览器直达</span>
+        <h1 id="hero-title">漫蛙网页版入口</h1>
+        <p class="lead">漫蛙网页版入口为习惯在浏览器中阅读漫画的读者准备。这里说明网页版的访问方式、登录前后能做什么，以及遇到打不开、加载慢时可以按顺序排查的环节，帮助你先把入口找对，再谈阅读体验。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#entry">查看入口说明</a>
+          <a class="btn btn-ghost" href="#steps">访问步骤</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 320 210" width="100%" role="img" aria-label="浏览器阅读漫画示意图">
+          <rect x="0" y="0" width="320" height="210" rx="18" fill="#0e3432"/>
+          <rect x="16" y="18" width="288" height="26" rx="10" fill="#1c5550"/>
+          <circle cx="32" cy="31" r="4" fill="#ffd166"/>
+          <circle cx="46" cy="31" r="4" fill="#6ee7c8"/>
+          <circle cx="60" cy="31" r="4" fill="#b9d4cc"/>
+          <rect x="16" y="54" width="288" height="140" rx="12" fill="#f6f4ec"/>
+          <rect x="30" y="68" width="118" height="112" rx="8" fill="#cfe9e0"/>
+          <rect x="42" y="82" width="94" height="10" rx="5" fill="#2a6e64"/>
+          <rect x="42" y="100" width="70" height="8" rx="4" fill="#8fb3aa"/>
+          <rect x="42" y="116" width="84" height="8" rx="4" fill="#8fb3aa"/>
+          <rect x="42" y="140" width="52" height="20" rx="10" fill="#ffd166"/>
+          <rect x="162" y="68" width="128" height="50" rx="8" fill="#e4f4ee"/>
+          <rect x="162" y="126" width="128" height="54" rx="8" fill="#e4f4ee"/>
+          <rect x="174" y="80" width="86" height="8" rx="4" fill="#2a6e64"/>
+          <rect x="174" y="96" width="60" height="7" rx="3.5" fill="#8fb3aa"/>
+          <rect x="174" y="138" width="72" height="8" rx="4" fill="#2a6e64"/>
+          <rect x="174" y="154" width="52" height="7" rx="3.5" fill="#8fb3aa"/>
+        </svg>
+        <div class="hero-facts">
+          <div class="fact"><b>浏览器</b><span>无需安装即可打开</span></div>
+          <div class="fact"><b>多端</b><span>电脑与手机均可访问</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="entry">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">Entry</div>
+        <h2>漫蛙网页版入口的三种常见到达方式</h2>
+        <p>访问需求不同，进入漫蛙网页版入口的路径也不同。以下三种方式分别对应直接输入、站内跳转与移动端访问。</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <span class="card-mark" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="#123c3a" stroke-width="1.8"/><path d="M3 9h18" stroke="#123c3a" stroke-width="1.8"/></svg>
+          </span>
+          <h3>直接输入地址</h3>
+          <p>在浏览器地址栏输入漫蛙网页版的访问地址即可打开。建议手动输入或使用收藏夹，避免通过来源不明的短链跳转，减少误入仿冒页面的可能。</p>
+          <a class="go" href="#steps">查看操作顺序</a>
+        </article>
+        <article class="card">
+          <span class="card-mark" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#123c3a" stroke-width="1.8"/><path d="M8 12h8M12 8v8" stroke="#123c3a" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+          <h3>收藏后反复访问</h3>
+          <p>首次成功进入漫蛙网页版入口后，把地址加入浏览器书签。之后从书签打开，既省去重复输入，也能固定使用同一个已验证的入口。</p>
+          <a class="go" href="#reading">阅读访问须知</a>
+        </article>
+        <article class="card">
+          <span class="card-mark" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="7" y="3" width="10" height="18" rx="3" stroke="#123c3a" stroke-width="1.8"/><path d="M10 18h4" stroke="#123c3a" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+          <h3>移动端访问</h3>
+          <p>手机浏览器同样可以打开漫蛙网页版。屏幕较小时建议横屏或双指缩放查看跨页内容，并把常用入口添加到主屏幕，方便下次直接进入。</p>
+          <a class="go" href="#faq">查看常见问题</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="steps">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">Steps</div>
+        <h2>从打开浏览器到进入阅读的四个步骤</h2>
+        <p>把访问过程拆成可复现的步骤，遇到问题时更容易判断卡在哪一环。</p>
+      </div>
+      <div class="steps-wrap">
+        <div class="steps">
+          <div class="step">
+            <h3>打开浏览器</h3>
+            <p>使用系统自带浏览器或主流第三方浏览器，保持为较新的版本，避免因内核过旧导致页面脚本无法正常加载。</p>
+          </div>
+          <div class="step">
+            <h3>输入入口地址</h3>
+            <p>在地址栏输入漫蛙网页版入口地址并回车，注意核对域名拼写，不要多打或少打字符。</p>
+          </div>
+          <div class="step">
+            <h3>等待页面加载</h3>
+            <p>首次访问可能需要下载静态资源，网络较慢时耐心等待，不要连续刷新，以免重复请求拖慢加载。</p>
+          </div>
+          <div class="step">
+            <h3>选择内容阅读</h3>
+            <p>页面正常显示后，通过分类或搜索找到想看的作品，点击进入详情页即可开始阅读。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reading">
+    <div class="wrap split">
+      <div class="prose">
+        <div class="sec-head" style="margin-bottom:18px;">
+          <div class="sec-tag">Notes</div>
+          <h2>使用漫蛙网页版入口前需要了解的事</h2>
+        </div>
+        <p>漫蛙网页版入口的价值在于“省事”：不用安装客户端，打开浏览器就能浏览作品列表和章节内容。对偶尔阅读、换设备频繁的读者来说，网页版的优势比功能数量更重要。但网页版也受浏览器环境影响，理解这一点能减少很多误判。</p>
+        <h3>网页版与客户端的分工</h3>
+        <p>网页版适合快速查看与临时阅读，不必占用本地存储；客户端通常在阅读记录保存、离线缓存等场景更稳定。如果你只是想在午休时翻几话，漫蛙网页版入口是更轻量的选择；若长期追更，再考虑安装客户端。</p>
+        <h3>访问时的几个习惯</h3>
+        <ul>
+          <li>固定使用同一个已验证的入口地址，并加入书签。</li>
+          <li>不要在多个来源不明的页面之间反复跳转。</li>
+          <li>遇到加载异常先检查网络，再尝试更换浏览器。</li>
+          <li>公共设备上阅读后，记得清理浏览记录。</li>
+        </ul>
+        <p>这些习惯与漫蛙网页版入口本身无关，却直接决定访问是否顺畅。把入口固定下来，后续的问题基本都能归入网络或浏览器两类，排查范围会小很多。</p>
+      </div>
+      <aside class="aside">
+        <h3>入口速览</h3>
+        <dl>
+          <dt>适用设备</dt>
+          <dd>电脑浏览器、手机浏览器</dd>
+          <dt>是否需要安装</dt>
+          <dd>不需要，浏览器直接访问</dd>
+          <dt>推荐访问方式</dt>
+          <dd>书签收藏后重复打开</dd>
+          <dt>常见异常</dt>
+          <dd>加载缓慢、页面空白、跳转失败</dd>
+          <dt>优先排查项</dt>
+          <dd>网络连接与浏览器版本</dd>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-tag">FAQ</div>
+        <h2>漫蛙网页版入口常见问题</h2>
+        <p>以下问题集中在访问环节，按出现频率从高到低排列。</p>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>漫蛙网页版入口打不开怎么办？</summary>
+          <p>先确认当前网络是否正常，可尝试打开其他网站对比。若其他网站正常而入口页面无响应，换一个浏览器或清除缓存后重试。仍无法打开时，检查地址是否输入完整，避免使用过期或拼写错误的链接。</p>
+        </details>
+        <details>
+          <summary>网页版需要注册或登录吗？</summary>
+          <p>浏览部分内容通常无需登录。若涉及阅读记录同步等个人功能，则可能需要账号。具体以页面实际提示为准，不要在非官方页面填写账号信息。</p>
+        </details>
+        <details>
+          <summary>手机能直接打开漫蛙网页版入口吗？</summary>
+          <p>可以。手机浏览器访问与电脑端是同一入口，页面会按屏幕宽度自适应。竖屏阅读单页较舒适，跨页内容可横屏或缩放查看。</p>
+        </details>
+        <details>
+          <summary>页面加载很慢是什么原因？</summary>
+          <p>常见原因是网络带宽不足、浏览器插件拦截或缓存过多。可先关闭广告拦截类插件再刷新，或切换到更稳定的网络环境。避免在加载中反复点击刷新。</p>
+        </details>
+        <details>
+          <summary>如何保存漫蛙网页版入口方便下次访问？</summary>
+          <p>在浏览器中使用“添加书签”或“添加到主屏幕”，命名后保存。下次从书签直接打开即可，不必再次搜索入口。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="wrap">
+      <div class="strip">
+        <div>
+          <h2>漫蛙客户端下载</h2>
+          <p>需要长期追更、保存阅读记录时，可考虑使用客户端。客户端安装包正在准备中，页面将在文件就绪后更新下载地址。</p>
+        </div>
+        <a class="btn btn-dl" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1">下载</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <circle cx="9" cy="10" r="3" fill="#ffd166"/>
+              <circle cx="17" cy="10" r="3" fill="#ffd166"/>
+              <path d="M7 16c1.6 2.2 3.4 3 5 3s3.4-.8 5-3" stroke="#6ee7c8" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          漫蛙网页版入口
+        </div>
+        <p style="font-size:.86rem;margin:0;max-width:30em;">本页围绕漫蛙网页版入口整理访问方式与排查思路，帮助读者在浏览器中顺畅进入漫蛙网页版阅读页面。</p>
+      </div>
+      <div>
+        <h4>页面导航</h4>
+        <ul>
+          <li><a href="#entry">入口说明</a></li>
+          <li><a href="#steps">访问步骤</a></li>
+          <li><a href="#reading">访问须知</a></li>
+          <li><a href="#faq">常见问题</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>相关入口</h4>
+        <ul>
+          <li><a href="#download">客户端下载</a></li>
+          <li><a href="#top">返回顶部</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-note">
+      <span>漫蛙网页版入口 · 浏览器访问说明页</span>
+      <span>页面内容以访问方式说明为主，具体功能以实际页面为准。</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
